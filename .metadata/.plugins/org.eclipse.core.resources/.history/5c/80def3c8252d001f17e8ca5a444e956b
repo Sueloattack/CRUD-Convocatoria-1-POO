@@ -1,0 +1,29 @@
+package com.example.demo.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.demo.models.Docente;
+import com.example.demo.models.common.RequestDocenteDto;
+import com.example.demo.repositories.DocenteRepository;
+
+@Service
+public class DocenteService {
+	@Autowired
+	private DocenteRepository docenteRepository;
+	
+	private Docente mapperEstudiante(RequestDocenteDto docente) {
+		
+		Docente est = new Docente();
+		
+		est.setNombres(docente.getNombres());
+		est.setApellidos(docente.getApellidos());
+		est.setEmail(docente.getEmail());
+		est.setCelular(docente.getCelular());
+		est.setTipoDocumento(docente.getTipoDocumento());
+		est.setNumeroIdentificacion(docente.getNumeroIdentificacion());
+		est.setId(0);
+		return est;
+	}
+}

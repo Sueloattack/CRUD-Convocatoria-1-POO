@@ -1,0 +1,62 @@
+package com.example.demo.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.demo.models.Docente;
+import com.example.demo.models.common.RequestDocenteDto;
+import com.example.demo.repositories.DocenteRepository;
+
+@Service
+public class DocenteService {
+	
+	@Autowired
+	private DocenteRepository docenteRepository;
+	
+	private Docente mapperDocente(RequestDocenteDto docente) {
+		
+		Docente est = new Docente();
+		
+		est.setNombres(docente.getNombres());
+		est.setApellidos(docente.getApellidos());
+		est.setEmail(docente.getEmail());
+		est.setCelular(docente.getCelular());
+		est.setTipoDocumento(docente.getTipoDocumento());
+		est.setNumeroIdentificacion(docente.getNumeroIdentificacion());
+		est.setId(0);
+		return est;
+	}
+	
+	public Docente save(RequestDocenteDto docente) {
+		return docenteRepository.save(mapperDocente(docente));
+	}
+	
+	public List<Docente> getAll(){
+		return (List<Docente>) DocenteRepository.findAll();
+	}
+	
+	public Docente update(Docente docente) {
+		if(existeDocente(docente.getId())){
+			return docenteRepository.save(docente);	
+		}
+		return null;
+	}
+	
+	public boolean delete(int Id){
+		try {
+			return existeDocente(Id) ? eliminarDocente(Id):false;
+		}catch(Exception ex){
+			return false;
+		}
+	}
+	
+	private boolean existeDocente(int Id){
+		return docenteRepository.existsById(Id);
+	}
+	
+	private boolean eliminarDocente(int Id) {
+		docenteRepository.deleteById(Id);;
+		return true;
+	}
+}

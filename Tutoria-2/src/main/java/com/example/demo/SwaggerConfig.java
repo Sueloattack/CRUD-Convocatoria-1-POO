@@ -1,0 +1,29 @@
+package com.example.demo;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SwaggerConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+            .components(new Components())
+            .info(new Info()
+                .title("CRUD Convocatoria 1 POO")
+                .version("v0")
+                .description("Hecho por: Cipa 1\nJaider Julian Manco,\nJuan José Ardila,\nLinda Gonzalez y\nStephanie Solano")
+                .contact(new Contact()
+                    .name("Cipa 1"))
+                .license(new License()
+                    .name("Apache 2.0")
+                    .url("http://springdoc.org")));
+    }
+}
+
